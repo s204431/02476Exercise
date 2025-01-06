@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
 import torch
 import typer
-from exercise.model import MyAwesomeModel
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
+
+from exercise.model import MyAwesomeModel
 
 
 def visualize(model_checkpoint: str, figure_name: str = "embeddings.png") -> None:
