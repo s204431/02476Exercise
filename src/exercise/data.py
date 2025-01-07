@@ -1,5 +1,7 @@
 import torch
 import typer
+from pathlib import Path
+import os
 
 
 def normalize(images: torch.Tensor) -> torch.Tensor:
@@ -35,10 +37,11 @@ def preprocess_data(raw_dir: str, processed_dir: str) -> None:
 
 def corrupt_mnist() -> tuple[torch.utils.data.Dataset, torch.utils.data.Dataset]:
     """Return train and test datasets for corrupt MNIST."""
-    train_images = torch.load("data/processed/train_images.pt")
-    train_target = torch.load("data/processed/train_target.pt")
-    test_images = torch.load("data/processed/test_images.pt")
-    test_target = torch.load("data/processed/test_target.pt")
+    path = Path(os.getcwd()).parent.parent.parent.absolute()
+    train_images = torch.load(f"{path}/data/processed/train_images.pt")
+    train_target = torch.load(f"{path}/data/processed/train_target.pt")
+    test_images = torch.load(f"{path}/data/processed/test_images.pt")
+    test_target = torch.load(f"{path}/data/processed/test_target.pt")
 
     train_set = torch.utils.data.TensorDataset(train_images, train_target)
     test_set = torch.utils.data.TensorDataset(test_images, test_target)

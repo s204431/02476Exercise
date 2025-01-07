@@ -1,0 +1,15 @@
+model:
+  hps:
+    hidden1: 32
+    hidden2: 64
+    hidden3: 128
+    kernel_size: 3
+    stride: 1
+    dropout: 0.5
+    pool_size: 2
+    pool_stride: 2
+training:
+  hps:
+    lr: 0.001
+    batch_size: 32
+    epochs: 10

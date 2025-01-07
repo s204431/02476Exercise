@@ -1,26 +1,28 @@
 import torch
+import hydra
 from torch import nn
 
 
 class MyAwesomeModel(nn.Module):
     """My awesome model."""
 
-    def __init__(self) -> None:
+    def __init__(self, hps) -> None:
         super().__init__()
-        self.conv1 = nn.Conv2d(1, 32, 3, 1)
-        self.conv2 = nn.Conv2d(32, 64, 3, 1)
-        self.conv3 = nn.Conv2d(64, 128, 3, 1)
-        self.dropout = nn.Dropout(0.5)
-        self.fc1 = nn.Linear(128, 10)
+        self.hps = hps
+        self.conv1 = nn.Conv2d(1, hps.hidden1, hps.kernel_size, hps.stride)
+        self.conv2 = nn.Conv2d(hps.hidden1, hps.hidden2, hps.kernel_size, hps.stride)
+        self.conv3 = nn.Conv2d(hps.hidden2, hps.hidden3, hps.kernel_size, hps.stride)
+        self.dropout = nn.Dropout(hps.dropout)
+        self.fc1 = nn.Linear(hps.hidden3, 10)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Forward pass."""
         x = torch.relu(self.conv1(x))
-        x = torch.max_pool2d(x, 2, 2)
+        x = torch.max_pool2d(x, self.hps.pool_size, self.hps.pool_stride)
         x = torch.relu(self.conv2(x))
-        x = torch.max_pool2d(x, 2, 2)
+        x = torch.max_pool2d(x, self.hps.pool_size, self.hps.pool_stride)
         x = torch.relu(self.conv3(x))
-        x = torch.max_pool2d(x, 2, 2)
+        x = torch.max_pool2d(x, self.hps.pool_size, self.hps.pool_stride)
         x = torch.flatten(x, 1)
         x = self.dropout(x)
         return self.fc1(x)

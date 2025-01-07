@@ -26,3 +26,7 @@ lint.select = ["I"]
 
 [tool.coverage.run]
 omit = ["tests/*"]
+
+[project.scripts]
+train = "exercise.train:main"
+evaluate = "exercise.evaluate:main"

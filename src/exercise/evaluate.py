@@ -1,18 +1,23 @@
 import torch
 import typer
-from model import MyAwesomeModel
+import hydra
+from pathlib import Path
+import os
+from exercise.model import MyAwesomeModel
 
-from data import corrupt_mnist
+from exercise.data import corrupt_mnist
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
 
-def evaluate(model_checkpoint: str) -> None:
+def evaluate(hps) -> None:
     """Evaluate a trained model."""
+    path = Path(os.getcwd()).parent.parent.parent.absolute()
+    model_checkpoint = f"{path}/models/{hps.model_file}"
     print("Evaluating like my life depended on it")
     print(model_checkpoint)
 
-    model = MyAwesomeModel().to(DEVICE)
+    model = MyAwesomeModel(hps).to(DEVICE)
     model.load_state_dict(torch.load(model_checkpoint))
 
     _, test_set = corrupt_mnist()
@@ -27,6 +32,9 @@ def evaluate(model_checkpoint: str) -> None:
         total += target.size(0)
     print(f"Test accuracy: {correct / total}")
 
+@hydra.main(config_name="config.yaml", config_path=f"{os.getcwd()}/configs")
+def main(cfg):
+    evaluate(cfg.model.hps)
 
 if __name__ == "__main__":
-    typer.run(evaluate)
+    main()

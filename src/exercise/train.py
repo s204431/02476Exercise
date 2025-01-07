@@ -1,28 +1,31 @@
 import matplotlib.pyplot as plt
 import torch
 import typer
-from model import MyAwesomeModel
+import hydra
+from pathlib import Path
+import os
+from exercise.model import MyAwesomeModel
 
-from data import corrupt_mnist
+from exercise.data import corrupt_mnist
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
-
-def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 10) -> None:
+def train(hps, model_hps) -> None:
     """Train a model on MNIST."""
+    path = Path(os.getcwd()).parent.parent.parent.absolute()
     print("Training day and night")
-    print(f"{lr=}, {batch_size=}, {epochs=}")
+    print(f"{hps.lr=}, {hps.batch_size=}, {hps.epochs=}")
 
-    model = MyAwesomeModel().to(DEVICE)
+    model = MyAwesomeModel(model_hps).to(DEVICE)
     train_set, _ = corrupt_mnist()
 
-    train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=batch_size)
+    train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=hps.batch_size)
 
     loss_fn = torch.nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    optimizer = torch.optim.Adam(model.parameters(), lr=hps.lr)
 
     statistics = {"train_loss": [], "train_accuracy": []}
-    for epoch in range(epochs):
+    for epoch in range(hps.epochs):
         model.train()
         for i, (img, target) in enumerate(train_dataloader):
             img, target = img.to(DEVICE), target.to(DEVICE)
@@ -40,14 +43,17 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 10) -> None:
                 print(f"Epoch {epoch}, iter {i}, loss: {loss.item()}")
 
     print("Training complete")
-    torch.save(model.state_dict(), "models/model.pth")
+    torch.save(model.state_dict(), f"{path}/models/model.pth")
     fig, axs = plt.subplots(1, 2, figsize=(15, 5))
     axs[0].plot(statistics["train_loss"])
     axs[0].set_title("Train loss")
     axs[1].plot(statistics["train_accuracy"])
     axs[1].set_title("Train accuracy")
-    fig.savefig("reports/figures/training_statistics.png")
+    fig.savefig(f"{path}/reports/figures/training_statistics.png")
 
+@hydra.main(config_name="config.yaml", config_path=f"{os.getcwd()}/configs")
+def main(cfg):
+    train(cfg.training.hps, cfg.model.hps)
 
 if __name__ == "__main__":
-    typer.run(train)
+    main()
