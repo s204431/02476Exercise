@@ -4,6 +4,7 @@ import typer
 import hydra
 from pathlib import Path
 import os
+
 from exercise.model import MyAwesomeModel
 
 from exercise.data import corrupt_mnist
