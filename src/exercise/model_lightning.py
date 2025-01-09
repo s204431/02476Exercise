@@ -1,14 +1,15 @@
 import torch
 import hydra
 from torch import nn
+from pytorch_lightning import LightningModule
 
-
-class MyAwesomeModel(nn.Module):
+class MyAwesomeModel(LightningModule):
     """My awesome model."""
 
-    def __init__(self, hps) -> None:
+    def __init__(self, hps, lr) -> None:
         super().__init__()
         self.hps = hps
+        self.lr = lr
         self.conv1 = nn.Conv2d(1, hps.hidden1, hps.kernel_size, hps.stride)
         self.conv2 = nn.Conv2d(hps.hidden1, hps.hidden2, hps.kernel_size, hps.stride)
         self.conv3 = nn.Conv2d(hps.hidden2, hps.hidden3, hps.kernel_size, hps.stride)
@@ -17,10 +18,6 @@ class MyAwesomeModel(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Forward pass."""
-        if x.ndim != 4:
-            raise ValueError('Expected input to a 4D tensor')
-        if x.shape[1] != 1 or x.shape[2] != 28 or x.shape[3] != 28:
-            raise ValueError('Expected each sample to have shape [1, 28, 28]')
         x = torch.relu(self.conv1(x))
         x = torch.max_pool2d(x, self.hps.pool_size, self.hps.pool_stride)
         x = torch.relu(self.conv2(x))
@@ -30,6 +27,26 @@ class MyAwesomeModel(nn.Module):
         x = torch.flatten(x, 1)
         x = self.dropout(x)
         return self.fc1(x)
+    
+    def training_step(self, batch, batch_idx):
+        img, target = batch
+        y_pred = self(img)
+        loss = nn.CrossEntropyLoss()(y_pred, target)
+        acc = (target == y_pred.argmax(dim=-1)).float().mean()
+        self.log('train_loss', loss)
+        self.log('train_acc', acc)
+        return loss
+    
+    def validation_step(self, batch) -> None:
+        data, target = batch
+        preds = self(data)
+        loss = nn.CrossEntropyLoss()(preds, target)
+        acc = (target == preds.argmax(dim=-1)).float().mean()
+        self.log('val_loss', loss, on_epoch=True)
+        self.log('val_acc', acc, on_epoch=True)
+    
+    def configure_optimizers(self):
+        return torch.optim.Adam(self.parameters(), lr=self.lr)
 
 
 if __name__ == "__main__":

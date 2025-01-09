@@ -1,0 +1,31 @@
+{
+  "os": "Windows-10-10.0.22631-SP0",
+  "python": "CPython 3.11.11",
+  "startedAt": "2025-01-08T13:48:20.588461Z",
+  "program": "C:\\Users\\jensl\\Desktop\\Course02476\\02476Exercise\\src\\exercise\\train_lightning.py",
+  "codePath": "src\\exercise\\train_lightning.py",
+  "git": {
+    "remote": "https://github.com/s204431/02476Exercise.git",
+    "commit": "0f46bf9d99bd1d08b861936f729368aba795398c"
+  },
+  "email": "s204431@student.dtu.dk",
+  "root": ".",
+  "host": "JensPC",
+  "executable": "C:\\Users\\jensl\\miniconda3\\envs\\my_environment\\python.exe",
+  "codePathLocal": "..\\..\\..\\src\\exercise\\train_lightning.py",
+  "cpu_count": 10,
+  "cpu_count_logical": 12,
+  "disk": {
+    "/": {
+      "total": "491161382912",
+      "used": "308090081280"
+    }
+  },
+  "memory": {
+    "total": "16782143488"
+  },
+  "cpu": {
+    "count": 10,
+    "countLogical": 12
+  }
+}

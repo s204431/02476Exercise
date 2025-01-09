@@ -1,0 +1,31 @@
+{
+  "os": "Windows-10-10.0.22631-SP0",
+  "python": "CPython 3.11.11",
+  "startedAt": "2025-01-08T11:27:02.017015Z",
+  "program": "C:\\Users\\jensl\\Desktop\\Course02476\\02476Exercise\\src\\exercise\\load_from_wandb.py",
+  "codePath": "src\\exercise\\load_from_wandb.py",
+  "git": {
+    "remote": "https://github.com/s204431/02476Exercise.git",
+    "commit": "0f46bf9d99bd1d08b861936f729368aba795398c"
+  },
+  "email": "s204431@student.dtu.dk",
+  "root": "C:\\Users\\jensl\\Desktop\\Course02476\\02476Exercise\\outputs\\2025-01-08\\12-27-00",
+  "host": "JensPC",
+  "executable": "C:\\Users\\jensl\\miniconda3\\envs\\my_environment\\python.exe",
+  "codePathLocal": "..\\..\\..\\src\\exercise\\load_from_wandb.py",
+  "cpu_count": 10,
+  "cpu_count_logical": 12,
+  "disk": {
+    "/": {
+      "total": "491161382912",
+      "used": "307307405312"
+    }
+  },
+  "memory": {
+    "total": "16782143488"
+  },
+  "cpu": {
+    "count": 10,
+    "countLogical": 12
+  }
+}

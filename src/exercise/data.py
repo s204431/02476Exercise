@@ -35,9 +35,12 @@ def preprocess_data(raw_dir: str, processed_dir: str) -> None:
     torch.save(test_target, f"{processed_dir}/test_target.pt")
 
 
-def corrupt_mnist() -> tuple[torch.utils.data.Dataset, torch.utils.data.Dataset]:
+def corrupt_mnist(testing=False) -> tuple[torch.utils.data.Dataset, torch.utils.data.Dataset]:
     """Return train and test datasets for corrupt MNIST."""
-    path = Path(os.getcwd()).parent.parent.parent.absolute()
+    if testing:
+        path = Path(os.getcwd()).absolute()
+    else:
+        path = Path(os.getcwd()).parent.parent.parent.absolute()
     train_images = torch.load(f"{path}/data/processed/train_images.pt")
     train_target = torch.load(f"{path}/data/processed/train_target.pt")
     test_images = torch.load(f"{path}/data/processed/test_images.pt")
