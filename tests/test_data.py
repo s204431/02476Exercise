@@ -1,9 +1,11 @@
-from torch.utils.data import Dataset
-import torch
-import pytest
 import os
 
+import pytest
+import torch
+from torch.utils.data import Dataset
+
 from exercise.data import corrupt_mnist
+
 
 @pytest.mark.skipif(not os.path.exists("data/"), reason="Data files not found")
 def test_data():

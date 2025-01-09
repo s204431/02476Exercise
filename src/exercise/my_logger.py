@@ -1,5 +1,6 @@
-from loguru import logger
 import sys
+
+from loguru import logger
 
 logger.remove()  # Remove the default logger
 logger.add(sys.stdout, level="WARNING")  # Add a new logger with WARNING level

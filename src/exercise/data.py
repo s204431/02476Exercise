@@ -1,7 +1,8 @@
+import os
+from pathlib import Path
+
 import torch
 import typer
-from pathlib import Path
-import os
 
 
 def normalize(images: torch.Tensor) -> torch.Tensor:

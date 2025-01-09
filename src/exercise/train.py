@@ -1,15 +1,15 @@
+import os
+from pathlib import Path
+
+import hydra
 import matplotlib.pyplot as plt
 import torch
 import typer
-import hydra
-from pathlib import Path
-import os
 import wandb
 from sklearn.metrics import RocCurveDisplay, accuracy_score, f1_score, precision_score, recall_score
 
-from exercise.model import MyAwesomeModel
-
 from exercise.data import corrupt_mnist
+from exercise.model import MyAwesomeModel
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 

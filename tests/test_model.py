@@ -1,8 +1,11 @@
-from exercise.model import MyAwesomeModel
-import torch
-from hydra import initialize, compose
 import os
+
 import pytest
+import torch
+from hydra import compose, initialize
+
+from exercise.model import MyAwesomeModel
+
 
 def test_model():
     with initialize(version_base=None, config_path="../configs"):

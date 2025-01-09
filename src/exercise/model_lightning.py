@@ -1,7 +1,8 @@
-import torch
 import hydra
-from torch import nn
+import torch
 from pytorch_lightning import LightningModule
+from torch import nn
+
 
 class MyAwesomeModel(LightningModule):
     """My awesome model."""

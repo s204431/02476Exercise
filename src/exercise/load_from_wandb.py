@@ -1,8 +1,11 @@
-import wandb
-from exercise.model import MyAwesomeModel
-import torch
-import hydra
 import os
+
+import hydra
+import torch
+import wandb
+
+from exercise.model import MyAwesomeModel
+
 
 @hydra.main(config_name="config.yaml", config_path=f"{os.getcwd()}/configs")
 def main(cfg):

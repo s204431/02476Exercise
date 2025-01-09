@@ -1,10 +1,13 @@
-from pytorch_lightning import Trainer, loggers
-from exercise.model_lightning import MyAwesomeModel
-from pytorch_lightning.callbacks.early_stopping import EarlyStopping
-import hydra
 import os
-from exercise.data import corrupt_mnist
+
+import hydra
 import torch
+from pytorch_lightning import Trainer, loggers
+from pytorch_lightning.callbacks.early_stopping import EarlyStopping
+
+from exercise.data import corrupt_mnist
+from exercise.model_lightning import MyAwesomeModel
+
 
 def train(hps, hps_model):
     train_set, test_set = corrupt_mnist()
