@@ -13,6 +13,7 @@ from exercise.model import MyAwesomeModel
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
+
 def train(hps, model_hps) -> None:
     """Train a model on MNIST."""
     path = Path(os.getcwd()).parent.parent.parent.absolute()
@@ -79,7 +80,7 @@ def train(hps, model_hps) -> None:
         plt_image = wandb.Image(plt.gcf())
         plt.clf()
         wandb.log({"roc_curve": plt_image})
-        #wandb.log({"roc": plt})
+        # wandb.log({"roc": plt})
         # alternatively the wandb.plot.roc_curve function can be used
     final_accuracy = accuracy_score(targets, preds.argmax(dim=1))
     final_precision = precision_score(targets, preds.argmax(dim=1), average="weighted")
@@ -96,9 +97,11 @@ def train(hps, model_hps) -> None:
     artifact.add_file(f"{path}/models/model.pth")
     run.log_artifact(artifact)
 
+
 @hydra.main(config_name="config.yaml", config_path=f"{os.getcwd()}/configs")
 def main(cfg):
     train(cfg.training.hps, cfg.model.hps)
+
 
 if __name__ == "__main__":
     main()

@@ -28,24 +28,24 @@ class MyAwesomeModel(LightningModule):
         x = torch.flatten(x, 1)
         x = self.dropout(x)
         return self.fc1(x)
-    
+
     def training_step(self, batch, batch_idx):
         img, target = batch
         y_pred = self(img)
         loss = nn.CrossEntropyLoss()(y_pred, target)
         acc = (target == y_pred.argmax(dim=-1)).float().mean()
-        self.log('train_loss', loss)
-        self.log('train_acc', acc)
+        self.log("train_loss", loss)
+        self.log("train_acc", acc)
         return loss
-    
+
     def validation_step(self, batch) -> None:
         data, target = batch
         preds = self(data)
         loss = nn.CrossEntropyLoss()(preds, target)
         acc = (target == preds.argmax(dim=-1)).float().mean()
-        self.log('val_loss', loss, on_epoch=True)
-        self.log('val_acc', acc, on_epoch=True)
-    
+        self.log("val_loss", loss, on_epoch=True)
+        self.log("val_acc", acc, on_epoch=True)
+
     def configure_optimizers(self):
         return torch.optim.Adam(self.parameters(), lr=self.lr)
 

@@ -34,12 +34,18 @@ def evaluate(hps) -> None:
         total += target.size(0)
     print(f"Test accuracy: {correct / total}")
 
+
 @hydra.main(config_name="config.yaml", config_path=f"{os.getcwd()}/configs")
 def main(cfg):
-    with profile(activities=[ProfilerActivity.CPU], record_shapes=True, profile_memory=True, on_trace_ready=tensorboard_trace_handler("./log/resnet18")) as prof:
+    with profile(
+        activities=[ProfilerActivity.CPU],
+        record_shapes=True,
+        profile_memory=True,
+        on_trace_ready=tensorboard_trace_handler("./log/resnet18"),
+    ) as prof:
         evaluate(cfg.model.hps)
     print(prof.key_averages(group_by_input_shape=True).table(sort_by="self_cpu_memory_usage", row_limit=30))
-    #prof.export_chrome_trace("trace.json")
+    # prof.export_chrome_trace("trace.json")
 
 
 if __name__ == "__main__":
