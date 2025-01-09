@@ -2,8 +2,9 @@ import os
 
 import pytest
 import torch
-from exercise.model import MyAwesomeModel
 from hydra import compose, initialize
+
+from exercise.model import MyAwesomeModel
 
 
 def test_model():
