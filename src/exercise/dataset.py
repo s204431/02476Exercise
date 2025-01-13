@@ -3,12 +3,13 @@ from __future__ import annotations
 import os
 from typing import TYPE_CHECKING
 
+import matplotlib.pyplot as plt
 import torch
+import typer
 from torch import Tensor
 from torch.utils.data import Dataset
+
 from exercise.utils import show_image_and_target
-import matplotlib.pyplot as plt
-import typer
 
 if TYPE_CHECKING:
     import torchvision.transforms.v2 as transforms

@@ -1,9 +1,12 @@
-import wandb
 import os
 import time
-from exercise.model import MyAwesomeModel, load_from_checkpoint
+
 import torch
+import wandb
 from hydra import compose, initialize
+
+from exercise.model import MyAwesomeModel, load_from_checkpoint
+
 
 def load_model(artifact, hps):
     logdir = "artifacts"

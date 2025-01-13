@@ -1,5 +1,6 @@
-import torch
 import matplotlib.pyplot as plt
+import torch
+
 
 def show_image_and_target(images: torch.Tensor, target: torch.Tensor, show: bool = True) -> None:
     """Show images and target labels."""

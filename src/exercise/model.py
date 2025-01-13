@@ -2,6 +2,7 @@ import hydra
 import torch
 from torch import nn
 
+
 def load_from_checkpoint(checkpoint_path: str, hps) -> nn.Module:
     """Load model from checkpoint."""
     model = MyAwesomeModel(hps)
