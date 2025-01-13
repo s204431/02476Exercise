@@ -15,3 +15,5 @@ steps:
     'push',
     'europe-west1-docker.pkg.dev/$PROJECT_ID/dtumlops-447710/test'
   ]
+options:
+  logging: "CLOUD_LOGGING_ONLY"
