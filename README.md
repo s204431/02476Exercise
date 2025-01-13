@@ -1,6 +1,6 @@
 # exercise
 
-Exercise for the course
+Exercise for the course.
 
 ## Project structure
 
