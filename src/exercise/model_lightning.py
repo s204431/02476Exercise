@@ -34,8 +34,8 @@ class MyAwesomeModel(LightningModule):
         y_pred = self(img)
         loss = nn.CrossEntropyLoss()(y_pred, target)
         acc = (target == y_pred.argmax(dim=-1)).float().mean()
-        self.log("train_loss", loss, on_epoch=True)
-        self.log("train_acc", acc, on_epoch=True)
+        self.log("train_loss", loss)
+        self.log("train_acc", acc)
         return loss
 
     def validation_step(self, batch) -> None:
