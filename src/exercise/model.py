@@ -2,6 +2,11 @@ import hydra
 import torch
 from torch import nn
 
+def load_from_checkpoint(checkpoint_path: str, hps) -> nn.Module:
+    """Load model from checkpoint."""
+    model = MyAwesomeModel(hps)
+    model.load_state_dict(torch.load(checkpoint_path))
+    return model
 
 class MyAwesomeModel(nn.Module):
     """My awesome model."""
