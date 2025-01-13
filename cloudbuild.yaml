@@ -5,7 +5,7 @@ steps:
     'build',
     '.',
     '-t',
-    'europe-west1-docker.pkg.dev/$PROJECT_ID/test/TestImage',
+    'europe-west1-docker.pkg.dev/$PROJECT_ID/test',
     '-f',
     'trainer.dockerfile'
   ]
@@ -13,7 +13,7 @@ steps:
   id: 'Push container image'
   args: [
     'push',
-    'europe-west1-docker.pkg.dev/$PROJECT_ID/test/TestImage'
+    'europe-west1-docker.pkg.dev/$PROJECT_ID/test'
   ]
 options:
   logging: "CLOUD_LOGGING_ONLY"
