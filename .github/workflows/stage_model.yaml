@@ -43,6 +43,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        pip install -e .
         pip list
 
     - name: Test model
@@ -78,4 +79,4 @@ jobs:
 
     - name: Add production alias
       run: |
-        python link_model.py $MODEL_NAME -a production
+        python src/exercise/link_model.py $MODEL_NAME -a production
