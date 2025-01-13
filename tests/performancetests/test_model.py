@@ -11,7 +11,7 @@ from exercise.model import MyAwesomeModel, load_from_checkpoint
 def load_model(artifact, hps):
     logdir = "artifacts"
     model_checkpoint="s204431-technical-university-of-denmark-org/wandb-registry-model/Test:latest"
-    wandb.login(key=[os.getenv("WANDB_API_KEY")])
+    wandb.login(key=os.getenv("WANDB_API_KEY"))
     api = wandb.Api(
         api_key=os.getenv("WANDB_API_KEY"),
         overrides={"entity": os.getenv("WANDB_ENTITY"), "project": os.getenv("WANDB_PROJECT")},
