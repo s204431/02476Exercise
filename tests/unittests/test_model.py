@@ -8,7 +8,7 @@ from exercise.model import MyAwesomeModel
 
 
 def test_model():
-    with initialize(version_base=None, config_path="../configs"):
+    with initialize(version_base=None, config_path="../../configs"):
         cfg = compose(config_name="config")
     model = MyAwesomeModel(cfg.model.hps)
     x = torch.randn(1, 1, 28, 28)
@@ -17,7 +17,7 @@ def test_model():
 
 
 def test_error_on_wrong_shape():
-    with initialize(version_base=None, config_path="../configs"):
+    with initialize(version_base=None, config_path="../../configs"):
         cfg = compose(config_name="config")
     model = MyAwesomeModel(cfg.model.hps)
     with pytest.raises(ValueError, match="Expected input to a 4D tensor"):
@@ -28,7 +28,7 @@ def test_error_on_wrong_shape():
 
 @pytest.mark.parametrize("batch_size", [32, 64])
 def test_model(batch_size: int) -> None:
-    with initialize(version_base=None, config_path="../configs"):
+    with initialize(version_base=None, config_path="../../configs"):
         cfg = compose(config_name="config")
     model = MyAwesomeModel(cfg.model.hps)
     x = torch.randn(batch_size, 1, 28, 28)
