@@ -21,7 +21,6 @@ def load_model(artifact, hps):
     return load_from_checkpoint(f"{logdir}/{file_name}", hps)
 
 def test_model_speed():
-    wandb.login(key=os.getenv("WANDB_API_KEY"))
     with initialize(version_base=None, config_path="../../configs"):
         cfg = compose(config_name="config")
     model = load_model(os.getenv("MODEL_NAME"), cfg.model.hps)
