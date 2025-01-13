@@ -11,6 +11,7 @@ COPY pyproject.toml pyproject.toml
 COPY src/ src/
 COPY data/ data/
 COPY models/ models/
+COPY configs/ configs/
 
 WORKDIR /
 RUN pip install -r requirements.txt
