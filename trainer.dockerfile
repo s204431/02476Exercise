@@ -13,7 +13,7 @@ COPY data/ data/
 COPY models/ models/
 
 WORKDIR /
-RUN --mount=type=cache,target=~/pip/.cache pip install -r requirements.txt --no-cache-dir
+RUN pip install -r requirements.txt
 RUN pip install . --no-deps --no-cache-dir
 
 ENTRYPOINT ["python", "-u", "src/exercise/train.py"]
