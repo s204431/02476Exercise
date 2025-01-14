@@ -13,4 +13,4 @@ wandb==0.19.2
 pytorch-lightning==2.5.0
 pytest==8.3.4
 coverage==7.6.10
-pydantic==1.8.1
+pydantic==1.9.0
