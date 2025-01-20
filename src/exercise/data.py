@@ -6,7 +6,15 @@ import typer
 
 
 def normalize(images: torch.Tensor) -> torch.Tensor:
-    """Normalize images."""
+    """Normalize images.
+
+    Args:
+        images: Input images as a tensor.
+
+    Returns
+        output images after normalizing as a tensor.
+
+    """
     return (images - images.mean()) / images.std()
 
 

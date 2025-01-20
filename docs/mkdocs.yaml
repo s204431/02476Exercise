@@ -16,8 +16,9 @@ plugins:
         python:
           options:
             show_root_heading: true
-            separate_signature: true
+            separate_signatures: true
             show_signature_annotations: true
 
 nav:
   - Home: index.md
+  - Data: data.md
